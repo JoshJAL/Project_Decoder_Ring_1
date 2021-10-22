@@ -8,8 +8,14 @@ const caesarModule = (function () {
 
   function caesar(input, shift, encode = true) {
     // your solution code here
-    if (shift !== 0 || shift < -25 || shift > 25) {
+    if (shift === 0 || shift < -25 || shift > 25) {
       return false;
+    } else if (encode === true && shift < 0) {
+      return input.toLowerCase().replace(/[a-z]/g, (whatever) => String.fromCharCode((whatever.charCodeAt(0) - 97 + 26 + shift) % 26 + 97));
+    } else if (encode === true) {
+      return input.toLowerCase().replace(/[a-z]/g, (whatever) => String.fromCharCode((whatever.charCodeAt(0) - 97 + shift) % 26 + 97));
+    } else if (encode === false) {
+      return input.toLowerCase().replace(/[a-z]/g, (whatever) => String.fromCharCode((whatever.charCodeAt(0) - 97 + 26 - shift) % 26 + 97));
     }
   }
 
